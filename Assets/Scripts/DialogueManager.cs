@@ -5,19 +5,16 @@ using UnityEngine.UI;
 
 public class DialogueManager : MonoBehaviour
 {
+    [Header("Animators")]
     public Animator animator;
-    private Queue<string> sentences;
+    public Animator iconAnimator;
     
-
-    [Header("Name Space")]
-    [Tooltip("Determines whether to show name header in dialogue box")]
-    [SerializeField] bool showName;
+    [Tooltip("UI elements to attatch to dialogue manager")]
+    [Header("Dialogue Box Elements")]
     public Text nameText; //this is what we pull for the ui
-
-    [Header("Icon")]
-    [Tooltip("Determines whether to show icon box in dialogue box")]
-    [SerializeField] bool showIcon;
     public Text dialogueText; //determines what shows up in the ui
+    
+    private Queue<string> sentences;
 
     private void Start()
     {
@@ -26,9 +23,19 @@ public class DialogueManager : MonoBehaviour
 
     public void StartDialogue(Dialogue dialogue)
     {
+
         nameText.text = dialogue.characterName;
         sentences.Clear();
         
+        if(dialogue.hasIcon == true)
+        {
+            iconAnimator.SetBool("hasIcon", true);
+        }
+        else
+        {
+            iconAnimator.SetBool("hasIcon", false);
+        }
+
         animator.SetBool("isOpen", true);
 
         foreach(string sentence in dialogue.sentences)
@@ -54,11 +61,4 @@ public class DialogueManager : MonoBehaviour
     {
         animator.SetBool("isOpen", false);
     }
-
-    //method for assigning parameter into namespace
-    public void AssignName()
-    {
-        //take a parameter and assign it as characterName
-    }
-    //method for assigning parameter into icon space
 }
