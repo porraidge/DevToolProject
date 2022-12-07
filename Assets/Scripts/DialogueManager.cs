@@ -5,7 +5,9 @@ using UnityEngine.UI;
 
 public class DialogueManager : MonoBehaviour
 {
+    public Animator animator;
     private Queue<string> sentences;
+    
 
     [Header("Name Space")]
     [Tooltip("Determines whether to show name header in dialogue box")]
@@ -26,6 +28,8 @@ public class DialogueManager : MonoBehaviour
     {
         nameText.text = dialogue.characterName;
         sentences.Clear();
+        
+        animator.SetBool("isOpen", true);
 
         foreach(string sentence in dialogue.sentences)
         {
@@ -48,8 +52,7 @@ public class DialogueManager : MonoBehaviour
 
     void EndDialogue()
     {
-        Debug.Log("end of conversation");
-        //end the convo, turn off text boxes?
+        animator.SetBool("isOpen", false);
     }
 
     //method for assigning parameter into namespace

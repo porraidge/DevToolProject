@@ -6,6 +6,7 @@ using UnityEngine;
 public class Dialogue
 {
     public string characterName;
+    public bool hasIcon;
     public Sprite characterIcon;
 
     [TextArea(3, 10)]
