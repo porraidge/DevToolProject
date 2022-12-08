@@ -6,13 +6,16 @@ using UnityEngine.UI;
 public class DialogueManager : MonoBehaviour
 {
     [Header("Animators")]
-    public Animator animator;
+    public Animator dialogueBoxAnimatior;
     public Animator iconAnimator;
     
-    [Tooltip("UI elements to attatch to dialogue manager")]
+
     [Header("Dialogue Box Elements")]
-    public Text nameText; //this is what we pull for the ui
-    public Text dialogueText; //determines what shows up in the ui
+    [Tooltip("UI name text")]
+    public Text nameText; 
+    [Tooltip("UI dialogue text")]
+    public Text dialogueText; 
+    public Image iconImage;
     
     private Queue<string> sentences;
 
@@ -30,13 +33,14 @@ public class DialogueManager : MonoBehaviour
         if(dialogue.hasIcon == true)
         {
             iconAnimator.SetBool("hasIcon", true);
+            iconImage = dialogue.iconImage;
         }
         else
         {
             iconAnimator.SetBool("hasIcon", false);
         }
 
-        animator.SetBool("isOpen", true);
+        dialogueBoxAnimatior.SetBool("isOpen", true);
 
         foreach(string sentence in dialogue.sentences)
         {
@@ -59,6 +63,6 @@ public class DialogueManager : MonoBehaviour
 
     void EndDialogue()
     {
-        animator.SetBool("isOpen", false);
+        dialogueBoxAnimatior.SetBool("isOpen", false);
     }
 }
